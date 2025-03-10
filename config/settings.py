@@ -147,6 +147,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "/media/"
@@ -175,6 +176,17 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_BROKER')
 
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+CELERY_BEAT_SCHEDULE = {
+    'send_message_for_employer': {
+        'task': 'employees.tasks.send_message_for_employer',  # Путь к задаче
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи
+    },
+}
+
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
     "http://localhost:8000",
@@ -185,3 +197,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
+
+TELEGRAM_URL = os.getenv('TELEGRAM_URL')
+
+API_TOKEN_TELEGRAM = os.getenv('API_TOKEN_TELEGRAM')

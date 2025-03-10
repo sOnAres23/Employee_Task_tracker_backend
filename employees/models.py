@@ -5,6 +5,7 @@ class Employee(models.Model):
     """Модель создания сотрудника"""
     full_name = models.CharField(max_length=150, verbose_name="ФИО")
     post = models.CharField(max_length=150, verbose_name="Должность сотрудника")
+    tg_chat_id = models.CharField(max_length=50, blank=True, null=True, unique=True, verbose_name="Телеграм чат-id")
 
     class Meta:
         verbose_name = "Сотрудник"
