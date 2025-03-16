@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from employees.models import Task
+from employees.models import Employee, Task
 from users.models import User
 
 
@@ -12,9 +12,9 @@ class TrackerTest(APITestCase):
 
         # Создаем необходимы модели
         self.user = User.objects.create(email="test@example.com", password="password123")
-        # self.employee = Employee.objects.create(full_name="Тони Старк", post="Кодер", tg_chat_id="12345")
-        # self.task = Task.objects.create(title="Test", employee=self.employee, deadline="2025-12-31",
-        #                                 status=Task.TaskStatus.CREATED)
+        self.employee = Employee.objects.create(full_name="Тони Старк", post="Кодер", tg_chat_id="12345")
+        self.task = Task.objects.create(title="Test", employee=self.employee, deadline="2025-12-31",
+                                        status=Task.TaskStatus.CREATED)
 
         self.client.force_authenticate(user=self.user)
 
