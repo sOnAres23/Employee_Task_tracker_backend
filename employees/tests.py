@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from employees.models import Employee, Task
+from employees.models import Task
 from users.models import User
 
 
