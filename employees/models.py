@@ -28,7 +28,8 @@ class Task(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name="Исполнитель задачи",
                                  related_name="employee_task", blank=True, null=True)
     deadline = models.DateField(verbose_name="День до выполнения задачи", help_text="Укажите дату дэдлайна")
-    status = models.CharField(choices=TaskStatus, default=TaskStatus.CREATED, verbose_name="Статус задачи")
+    status = models.CharField(max_length=20, choices=TaskStatus, default=TaskStatus.CREATED,
+                              verbose_name="Статус задачи")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания задачи")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 

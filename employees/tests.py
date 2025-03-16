@@ -10,10 +10,6 @@ class TrackerTest(APITestCase):
     def setUp(self):
         """Прописывем исходные данные и необходимые параметры"""
 
-        # Очищаем всю БД для корректной работы
-        Employee.objects.all().delete()
-        Task.objects.all().delete()
-
         # Создаем необходимы модели
         self.user = User.objects.create(email="test@example.com", password="password123")
         self.employee = Employee.objects.create(full_name='Тони Старк', post="Кодер", tg_chat_id="12345")
